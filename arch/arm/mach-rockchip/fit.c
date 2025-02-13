@@ -143,8 +143,19 @@ static void *fit_get_blob(struct blk_desc *dev_desc,
 	__maybe_unused int conf_noffset;
 	disk_partition_t part;
 	char *part_name = PART_BOOT;
+	char *active;
 	void *fit, *fdt;
 	int blk_num;
+
+	active = env_get("active");
+	if (active) {
+		part_name = malloc(strlen(PART_BOOT) + strlen("_") + strlen(active) + 1);
+		if (!part_name) {
+			FIT_I("No memory for part_name\n");
+			return NULL;
+		}
+		sprintf(part_name, "%s_%s", PART_BOOT, active);
+	}
 
 #ifndef CONFIG_ANDROID_AB
 	if (rockchip_get_boot_mode() == BOOT_MODE_RECOVERY)

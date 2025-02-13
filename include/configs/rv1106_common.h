@@ -40,6 +40,10 @@
 #define CONFIG_SPL_BSS_MAX_SIZE		0x20000
 #define CONFIG_SPL_STACK		0x001fe000
 
+/* WDT */
+#define CONFIG_DW_WDT_BASE		0xff5a0000
+#define CONFIG_DW_WDT_CLOCK_KHZ		25000
+
 /* secure otp */
 #define OTP_UBOOT_ROLLBACK_OFFSET	0xe0
 #define OTP_UBOOT_ROLLBACK_WORDS	2	/* 64 bits, 2 words */
