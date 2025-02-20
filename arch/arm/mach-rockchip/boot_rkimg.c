@@ -329,12 +329,10 @@ __weak int rockchip_dnl_key_pressed(void)
 void setup_download_mode(void)
 {
 	int vbus = 1; /* Assumed 1 in case of no rockusb */
-	char *env_reboot_mode;
 
 	boot_devtype_init();
 
-	env_reboot_mode = env_get("reboot_mode");
-	if (rockchip_dnl_key_pressed() || is_hotkey(HK_ROCKUSB_DNL) || !strcmp(env_reboot_mode, "recovery-key")) {
+	if (rockchip_dnl_key_pressed() || is_hotkey(HK_ROCKUSB_DNL)) {
 		printf("download %skey pressed... ",
 		       is_hotkey(HK_ROCKUSB_DNL) ? "hot" : "");
 #ifdef CONFIG_CMD_ROCKUSB
